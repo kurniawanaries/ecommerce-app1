@@ -50,8 +50,8 @@ jobs:
         run: mvn clean -B package --file pom.xml
 
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-      - name: Update dependency graph
-        uses: advanced-security/maven-dependency-submission-action@b275d12641ac2d2108b2cbb7598b154ad2f2cee8
+ #     - name: Update dependency graph
+ #       uses: advanced-security/maven-dependency-submission-action@b275d12641ac2d2108b2cbb7598b154ad2f2cee8
 
   push-to-docker-hub:
     runs-on: ubuntu-latest
@@ -82,8 +82,7 @@ jobs:
           file: Dockerfile
           push: true
           labels: ${{ steps.meta.outputs.labels }}
-          kurniawanaries/ecommerce-app1:${{ github.run_number }}
-          kurniawanaries/ecommerce-app1:latest
+          tags: leexbuhtig/ecommerce:${{ github.run_number }}
           build-args: |
             GIT_VERSION_TAG=${{ env.RELEASE_VERSION }}
             GIT_COMMIT_MESSAGE=${{ github.event.head_commit.message }}
@@ -116,30 +115,30 @@ jobs:
           docker build . --tag $IMAGE_NAME:$TAG
           docker push $IMAGE_NAME:$TAG
 
-  #push-to-ecr:
-  #  runs-on: ubuntu-latest
-  #  needs: project-build
-  #  env:
-  #    IMAGE_TAG: ${{ github.run_number }}
-  #  steps:
-  #    - name: Checkout
-  #      uses: actions/checkout@v5
-
-  #    - run: docker build -t ecommerce:$IMAGE_TAG -f Dockerfile .
-
-  #    - name: Push to ECR
-   #     env:
-  #        ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
-  #        ECR_REPOSITORY: ${{vars.AWS_ECR_REPO}}
-  #        IMAGE_TAG: ${{ github.run_number }}
-  #      id: ecr
-  #      uses: jwalton/gh-ecr-push@v2
-  #      with:
-  #        access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  #        secret-access-key: ${{ secrets.AWS_ACCESS_SECRET_KEY }}
-  #        region: ${{ vars.AWS_REGION }}
-  #        local-image: ecommerce:$IMAGE_TAG
-  #        image: ecommerce:$IMAGE_TAG
+#  push-to-ecr:
+#    runs-on: ubuntu-latest
+#   needs: project-build
+#    env:
+#      IMAGE_TAG: ${{ github.run_number }}
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v5
+#
+#     - run: docker build -t ecommerce:$IMAGE_TAG -f Dockerfile .
+#
+#      - name: Push to ECR
+#        env:
+#          ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
+#          ECR_REPOSITORY: ${{vars.AWS_ECR_REPO}}
+#          IMAGE_TAG: ${{ github.run_number }}
+#        id: ecr
+#        uses: jwalton/gh-ecr-push@v2
+#        with:
+#          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          secret-access-key: ${{ secrets.AWS_ACCESS_SECRET_KEY }}
+#          region: ${{ vars.AWS_REGION }}
+#          local-image: ecommerce:$IMAGE_TAG
+#          image: ecommerce:$IMAGE_TAG
 
   deploy:
     needs: push-to-docker-hub
