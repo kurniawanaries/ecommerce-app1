@@ -8,7 +8,7 @@ source .env
 start=$(date +"%s")
 
 echo "🔐 Logging into Docker Hub..."
-docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
+# docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_TOKEN
 
 echo "📦 Pulling latest image..."
 docker pull kurniawanaries/ecommerce-app1:$IMAGE_TAG
