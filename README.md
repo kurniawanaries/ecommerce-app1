@@ -16,6 +16,7 @@ functionality.
 
 ### 🛍️ E-commerce Functionality
 
+
 - **Product Catalog**: Browse products by categories
 - **Shopping Cart**: Add/remove products, manage quantities
 - **Category Management**: Organized product categorization
