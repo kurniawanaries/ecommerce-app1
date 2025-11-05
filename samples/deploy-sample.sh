@@ -6,7 +6,7 @@ set +a
 source .env
 start=$(date +"%s")
 echo $YOUR_PERSONAL_ACCESS_TOKEN | docker login --username $DOCKER_USERNAME --password-stdin
-docker pull $CONTAINER_REPOSITORY:$IMAGE_TAG
+docker pull kurniawaniknas/ecommerce$IMAGE_TAG
 
 if [ "$(docker ps -qa -f name=$CONTAINER_NAME)" ]; then
     if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
@@ -18,7 +18,7 @@ if [ "$(docker ps -qa -f name=$CONTAINER_NAME)" ]; then
 fi
 
 docker run -d --restart unless-stopped -p $APP_PORT:$APP_PORT --env-file .env --name $CONTAINER_NAME  $CONTAINER_REPOSITORY:$IMAGE_TAG
-# $CONTAINER_REPOSITORY = hendisantika/ecommerce
+# $CONTAINER_REPOSITORY = kurniawaniknas/ecommerce
 docker ps
 exit
 ENDSSH
