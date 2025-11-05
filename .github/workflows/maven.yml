@@ -199,7 +199,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT }}
           source: "./.env"  # Path to the file on your runner
-          target: "~/ecommerce"  # Target directory on the server
+          target: "~/ecommerce-kurniawaniknas"  # Target directory on the server
 
       - name: Run the application
         env:
