@@ -82,8 +82,8 @@ jobs:
           file: Dockerfile
           push: true
           labels: ${{ steps.meta.outputs.labels }}
-          tags: kurniawanaries/ecommerce-app1:${{ github.run_number }}
-                kurniawanaries/ecommerce-app1:latest
+          tags: kurniawaniknas/ecommerce-app1:${{ github.run_number }}
+                kurniawaniknas/ecommerce-app1:latest
           build-args: |
             GIT_VERSION_TAG=${{ env.RELEASE_VERSION }}
             GIT_COMMIT_MESSAGE=${{ github.event.head_commit.message }}
